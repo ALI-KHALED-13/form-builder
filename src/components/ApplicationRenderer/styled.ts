@@ -32,13 +32,14 @@ export const StyledSectionContainer = styled.div`
 export const StyledField = styled.li`
   padding: 2.5rem 0;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2.5fr 1fr 1fr;
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   text-transform: capitalize;
+  border-bottom: 1px solid ${({theme})=> theme.lightGray};
 `;
 
 

@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import ApplicationRenderer from './components/ApplicationRenderer'
+import getPathTargetObj from './utils/getPathTargetObj'
 
 
 function App() {
@@ -23,17 +24,19 @@ function App() {
   const updateFormData =(fieldPath:string, value:any)=>{
 
     if (formData){
-      const attributesCopy = JSON.parse(JSON.stringify(formData.attributes))
+      const {targetObj, pathList, objCopy} = getPathTargetObj(fieldPath, formData.attributes);
+
+      /* const attributesCopy = JSON.parse(JSON.stringify(formData.attributes))
       let targetObj = attributesCopy;
       const pathList = fieldPath.split('.');
       const len = pathList.length;
       for(let i = 0; i < len-1; i++) {
           let prop = pathList[i];
-          targetObj = targetObj[prop as keyof (typeof targetObj)];
-      }
-      targetObj[pathList[len-1] as keyof typeof targetObj] = value;
+          targetObj = targetObj[prop as keyof (typeof targetObj)]; 
+      } */
+      targetObj[pathList[pathList.length - 1] as keyof typeof targetObj] = value;
 
-      setFormData({...formData, attributes: attributesCopy})
+      setFormData({...formData, attributes: objCopy})
     }  
   }
 

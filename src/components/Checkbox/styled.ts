@@ -22,7 +22,7 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
   width: 1.8rem;
   height: 1.8rem;
   border: none;
-  box-shadow: inset 0 0 0 1px ${({theme , disabled})=> theme[ disabled ? "gray" : "blue"] };
+  box-shadow: inset 0 0 0 1px ${({theme , disabled})=> theme[ disabled ? "gray" : "lightGreen"] };
   border-radius: 2px;
   background-color: transparent;
   cursor: pointer;
@@ -30,7 +30,7 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
   transition: background-color 0.2s ease-in-out;
 
   ${ ({ isChecked, disabled, theme})=> isChecked && css`
-    background-color: ${theme[disabled ? "gray" : "blue"]};
+    background-color: ${theme[disabled ? "gray" : "lightGreen"]};
     display: flex;
     justify-content: center;
   `}

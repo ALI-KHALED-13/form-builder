@@ -32,7 +32,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 export const StyledPrimaryButton = styled(StyledButton)<StyledButtonProps>`
   border-color: ${({color, theme}) => getColor(theme, color)};
   background-color: ${({color, theme}) => getColor(theme, color)};
-  color: ${({theme}) => theme.lightGray};
+  color: ${({theme}) => theme.white};
   &:hover {
     background-color: ${({$hoverColor, theme}) => getColor(theme, $hoverColor || "")};
     border-color: ${({$hoverColor, theme}) => getColor(theme, $hoverColor || "")};

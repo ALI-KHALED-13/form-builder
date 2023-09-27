@@ -28,17 +28,16 @@ interface DDRelatedProps {
 
 export const StyledDropDown = styled.div<StyledDDProps>`
   position: relative;
-  padding: 1rem 2rem;
+  padding: 1.5rem;
+  margin: 1rem 0;
   max-height: 40rem;
   min-width: 15rem;
-
-  background-color: ${({theme, isTransparent})=> isTransparent? "transparent":theme.lightGray};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border: 1px solid transparent;
+  border: 1px solid ${({theme})=> theme.lightGray};
   transition: border-color 0.2s ease-in-out;
   ${({readonly})=> readonly && css`
     opacity: 0.5;
@@ -46,7 +45,7 @@ export const StyledDropDown = styled.div<StyledDDProps>`
   `}
 
   ${({expandDD, theme, isTransparent})=> expandDD && !isTransparent && css`
-    border: 1px solid ${theme.blue};
+    border: 1px solid ${theme.green};
   `}
 `;
 
@@ -61,7 +60,7 @@ export const StyledOptionsContainer = styled.ul<DDRelatedProps>`
   clip-path: polygon(${({$expandDD})=> $expandDD? "-10% -10%, 100% -10%, 120% 120%, -10% 120%": "0 0, 100% 0, 100% 0, 0 0"});
   transition: clip-path 0.3s ease-in-out, width 0.3s ease-out, height 0.3s linear;
   border-top: none;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: white;
   box-shadow: 0px 10px 40px -7px ${({theme}) => theme.shadowGray};
   & > li:last-child {
