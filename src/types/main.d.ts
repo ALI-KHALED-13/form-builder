@@ -7,22 +7,31 @@ interface IOption {
 }
 
 
+interface IQuestion {
+  id: string;
+  question: string;
+  type: 'paragraph' | 'short' | 'radio' | 'dropdown' | 'MCQ' | 'date' | 'number' | 'upload';
+  choices?: string[];
+  maxChoice?: number;
+  other?: boolean;
+  disqualify?: boolean;
+}
+
 interface IApplicationFormTpl {
-  title:string;
-  sections: {
-      title: string;
-      type: 'image' | 'questions';
-      content?: File | null; // in case type === image
-      questions?: {
-        label: string;
-        path: string;
-        note?: string;
-        type: 'paragraph' | 'short' | 'radio' | 'dropdown' | 'MCQ' | 'date' | 'number' | 'upload';
-        publicity: 'internal'|'public';
-        visibility: 'hide' | 'show';
-        options?: IOption[]; // in case of type: dropdown | radio | MCQ
-      }[]
-  }[]
+  id: string;
+  type: string;
+  attributes: {
+    coverImage: string;
+    personalInformation: {
+      [key: string]: {internalUse: boolean, show: boolean, note?: string};
+      personalQuestions: IQuestion[]
+    };
+    profile: {
+      [key: string]: {mandatory: boolean, show: boolean, note?: string};
+      profileQuestions: IQuestion[]
+    };
+    customisedQuestions: IQuestion[]
+  }
 }
 
 

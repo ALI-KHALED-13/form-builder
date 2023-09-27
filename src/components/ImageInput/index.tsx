@@ -5,7 +5,7 @@ import Loader from "../Loader";
 import { ChangeEvent, useState, useRef} from "react";
 
 interface ImageInputProps {
-  value: { alt: string; url?: string; }
+  value: string; //url
   onChange: (file:File | null)=> void,
   readonly?: boolean;
   isLoading?: boolean;
@@ -47,9 +47,9 @@ const ImageInput =({
 
   return (
     <StyledImgContainer style={style}>
-      {!readonly && (value.url || uploadedImgTempURL) && (
+      {!readonly && (value || uploadedImgTempURL) && (
         <StyledImgControles>
-          { (value.url || uploadedImgTempURL) && (
+          { (value || uploadedImgTempURL) && (
             <Button
               color="white" onClick={handleDelete}
               style={{padding: "0.3rem 0.6rem", display: "flex"}}
@@ -70,10 +70,9 @@ const ImageInput =({
 
       {isLoading && <Loader style={{position: "absolute", left: "5px", top: "5px"}}/>}
 
-      {value.url || uploadedImgTempURL? (
+      {value || uploadedImgTempURL? (
         <StyledImg
-          alt={value.alt}
-          src={!readonly && uploadedImgTempURL? uploadedImgTempURL: value.url}
+          src={!readonly && uploadedImgTempURL? uploadedImgTempURL: value}
         />
       ):( // display the placeholder
         <div onClick={handleplaceholderClick}>

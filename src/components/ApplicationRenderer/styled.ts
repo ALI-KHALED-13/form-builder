@@ -23,20 +23,22 @@ export const StyledSectionHeader = styled.h2`
 `;
 
 export const StyledSectionContainer = styled.div`
-  padding: 4rem;
+  padding: 3rem;
   border-radius: 20px;
   box-shadow: 3px 3px 14px 0px rgba(190, 190, 190, 0.30);
 `;
 
 
-export const StyledQuestion = styled.li`
+export const StyledField = styled.li`
   padding: 2.5rem 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
+  text-transform: capitalize;
 `;
 
 

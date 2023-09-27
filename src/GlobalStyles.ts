@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { mediaQuery } from './utils/mediaQuery';
 
 
 export const colors = {
@@ -12,6 +11,7 @@ export const colors = {
   skyBlue: '#B1CDFD',
   whitishGray: '#F9FAFF',
   green: '#087B2F',
+  lightGreen: '#41a557',
   ///
   spaceNavy: '#373F68',
   navy: '#3A4374',
