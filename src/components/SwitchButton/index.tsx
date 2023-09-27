@@ -1,5 +1,4 @@
-import { getBlockLabelProps } from "../../utils/getBlockLabelProps";
-import { BlockLabel } from "../BlockLabel";
+
 import { StyledButtonSlider, StyledSwitch, StyledSwitchWrapper } from "./styled";
 
 
@@ -17,7 +16,6 @@ export function SwitchButton({
   disabled = false,
 }:SwitchButtonProps) {
 
-  const props = arguments[0];
 
   const handleClick = () => {
     !disabled &&
@@ -26,27 +24,23 @@ export function SwitchButton({
 
 
   return (
-    <div>
-      <BlockLabel {...getBlockLabelProps(props)} />
-
-      <StyledSwitchWrapper>
-        <StyledButtonSlider
+    <StyledSwitchWrapper>
+      <StyledButtonSlider
+        isChecked={isChecked}
+        disabled={disabled}
+        onClick={handleClick}
+      >
+        <StyledSwitch
+          className='StyledSwitch'
+          direction={isChecked ? "left" : "right"}
           isChecked={isChecked}
           disabled={disabled}
-          onClick={handleClick}
-        >
-          <StyledSwitch
-            className='StyledSwitch'
-            direction={isChecked ? "left" : "right"}
-            isChecked={isChecked}
-            disabled={disabled}
-          />
-        </StyledButtonSlider>
+        />
+      </StyledButtonSlider>
 
-        <label>
-          {option.display}
-        </label>
-      </StyledSwitchWrapper>
-    </div>
+      <label>
+        {option.display}
+      </label>
+    </StyledSwitchWrapper>
   );
 }
