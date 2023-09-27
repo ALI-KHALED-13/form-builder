@@ -10,7 +10,7 @@ interface IOption {
 interface IQuestion {
   id: string;
   question: string;
-  type: 'Paragraph' | 'short' | 'radio' | 'dropdown' | 'MCQ' | 'date' | 'number' | 'upload';
+  type: string;//'Paragraph' | 'short' | 'radio' | 'dropdown' | 'MCQ' | 'date' | 'number' | 'upload';
   choices?: string[];
   maxChoice?: number;
   other?: boolean;
