@@ -27,7 +27,7 @@ export const StyledInputContainer = styled.div<StyledInputProps>`
   position: relative;
   border: ${({theme, error}) => `1px solid ${error? theme.red : theme.gray}`};
   
-  ${({theme, readonly}) => !readonly && 
+  ${({readonly}) => !readonly && 
     css`
       padding: 0rem 1rem;
     `
