@@ -3,11 +3,12 @@
 
 export const questionTypesOps = [
   {value: 'Paragraph', display: 'Paragraph'},
-  {value: 'short', display: 'Short Answer'},
-  {value: 'Yes/No', display: 'Yes/No'},
-  {value: 'dropdown', display: 'Dropdown'},
-  {value: 'MCQ', display: 'Multiple Choice'},
-  {value: 'date', display: 'Date'},
-  {value: 'number', display: 'Number'},
-  {value: 'upload', display: 'File Upload'},
+  {value: 'ShortAnswer', display: 'Short Answer'},
+  {value: 'YesNo', display: 'Yes/No'},
+  {value: 'Dropdown', display: 'Dropdown'},
+  {value: 'MultipleChoice', display: 'Multiple Choice'},
+  {value: 'Date', display: 'Date'},
+  {value: 'Number', display: 'Number'},
+  {value: 'FileUpload', display: 'File upload'}
 ];
+

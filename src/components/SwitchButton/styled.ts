@@ -12,7 +12,7 @@ export const StyledSwitchWrapper = styled.div`
 `;
 
 interface StyledSliderProps {
-  isChecked?: boolean;
+  $isChecked?: boolean;
   disabled?: boolean;
   direction?: string;
 }
@@ -25,7 +25,7 @@ export const StyledButtonSlider = styled.div<StyledSliderProps>`
   border: 1px solid gray;
   border-radius: 1rem;
   cursor: ${({disabled})=> disabled? 'not-allowed':'pointer'};
-  background-color: ${ ({theme, isChecked})=> theme[isChecked? 'green': 'white']};
+  background-color: ${ ({theme, $isChecked})=> theme[$isChecked? 'green': 'white']};
 
   transition: background-color 0.3 ease-out;
 `;
@@ -39,7 +39,7 @@ export const StyledSwitch = styled.button<StyledSliderProps>`
   border-radius: 50%;
   cursor: ${({disabled})=> disabled? 'not-allowed':'pointer'};
   border: 1px solid gray; 
-  background-color: ${ ({theme, isChecked})=> theme[isChecked? 'lightGreen': 'whitishGray']};
+  background-color: ${ ({theme, $isChecked})=> theme[$isChecked? 'lightGreen': 'whitishGray']};
   position: absolute;
   top: -1px;
   left: ${ ({direction})=> direction === 'left'? '0':'calc(100% - 2rem)'};

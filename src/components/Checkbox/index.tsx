@@ -32,7 +32,7 @@ const Checkbox =({
         htmlFor={option.value}
       >
         <StyledCheckbox
-          isChecked={isChecked}
+          $isChecked={isChecked}
           disabled={disabled}
         >
           {isChecked && 

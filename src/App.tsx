@@ -7,18 +7,17 @@ import getPathTargetObj from './utils/getPathTargetObj'
 function App() {
 
   const [formData, setFormData] = useState<null | IApplicationFormTpl>(null)
+
   const tplTypeMap = {
     "applicationForm": ApplicationRenderer 
   }
 
   useEffect(()=> {
-    const controller = new AbortController();
 
-    fetch('http://127.0.0.1:4010/api/422.37546357374447/programs/nostrum/application-form', { signal: controller.signal })
+    fetch('http://127.0.0.1:4010/api/422.37546357374447/programs/nostrum/application-form')
     .then(resp=> resp.json())
     .then(respObj=> setFormData(respObj.data))
 
-    return ()=> controller.abort()
   }, [])
 
   const updateFormData =(fieldPath:string, value:any)=>{
@@ -26,14 +25,6 @@ function App() {
     if (formData){
       const {targetObj, pathList, objCopy} = getPathTargetObj(fieldPath, formData.attributes);
 
-      /* const attributesCopy = JSON.parse(JSON.stringify(formData.attributes))
-      let targetObj = attributesCopy;
-      const pathList = fieldPath.split('.');
-      const len = pathList.length;
-      for(let i = 0; i < len-1; i++) {
-          let prop = pathList[i];
-          targetObj = targetObj[prop as keyof (typeof targetObj)]; 
-      } */
       targetObj[pathList[pathList.length - 1] as keyof typeof targetObj] = value;
 
       setFormData({...formData, attributes: objCopy})
@@ -43,13 +34,11 @@ function App() {
   const Renderer = formData && tplTypeMap[formData?.type as keyof (typeof tplTypeMap)];
 
   return Renderer && (
-    <div>
       <Renderer
         readOnly={false}
         data={formData}
         onChange={updateFormData}
       />
-    </div>
   )
 }
 

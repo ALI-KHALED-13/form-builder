@@ -35,9 +35,9 @@ const DropDown =({
   isTransparent = false
 }: DropdownProps)=> {
   
-  const [expandDD, setExpandDD] = useState(false);
+  const [$expandDD, set$ExpandDD] = useState(false);
 
-  useClickOutside(() => setExpandDD(false));
+  useClickOutside(() => set$ExpandDD(false));
 
   return (
     <div>
@@ -47,9 +47,9 @@ const DropDown =({
         className="dropdown"
         onClick={(ev)=> {
           ev.stopPropagation();
-          !readonly && setExpandDD(!expandDD)
+          !readonly && set$ExpandDD(!$expandDD)
         }}
-        {...{expandDD, isTransparent, readonly}}
+        {...{$expandDD, $isTransparent: isTransparent, readonly}}
       >
       
         {value && (
@@ -65,15 +65,15 @@ const DropDown =({
         )}
         
         <StyledCaret
-          $expandDD={expandDD} // transient prop which is consumed only by styled components
+          $expandDD={$expandDD} // transient prop which is consumed only by styled components
           color={color || "blue"}
           weight="bold"
           size={14}
         />
         
         <StyledOptionsContainer
-          $expandDD={expandDD} // transient prop
-          aria-expanded={expandDD}
+          $expandDD={$expandDD} // transient prop
+          aria-expanded={$expandDD}
           onClick={(ev)=> ev.stopPropagation()}
         >
 
@@ -83,7 +83,7 @@ const DropDown =({
               <StyledOption
                 key={option.value}
                 onClick={()=> {
-                  setExpandDD(false)
+                  set$ExpandDD(false)
                   onChange(option)
                 }}
               >

@@ -15,12 +15,11 @@ const ChoicesQ =({question, onChange}:ChoicesQProps)=> {
     const choices = question.choices as string [];
 
     if (choices[index] !== undefined){// modiifcation
-      onChange('choices', 
-      typeof value === 'string'?
-        choices.map((ch, idx)=> idx === index? value:ch)
-        :
-        choices.filter((ch, idx)=> idx !== index)
-      )
+      if (typeof value === 'string') {
+        onChange('choices', choices.map((ch, idx)=> idx === index? value:ch))
+      } else if (value === null && choices.length > 1) { // delete
+        onChange('choices', choices.filter((_ch, idx)=> idx !== index))
+      }
     } else { // addition
       onChange('choices', choices.concat(value as string))
     }

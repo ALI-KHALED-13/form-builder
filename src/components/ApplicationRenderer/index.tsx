@@ -3,7 +3,7 @@ import Button from "../Button";
 import Checkbox from "../Checkbox";
 import ImageInput from "../ImageInput";
 import { SwitchButton } from "../SwitchButton";
-import { StyledFormWrapper, StyledField, StyledSectionContainer, StyledSectionHeader } from "./styled";
+import { StyledFormWrapper, StyledField, StyledSectionContainer, StyledSectionHeader, StyledQuestion } from "./styled";
 import QFormAccordion from "../QFormAccordion";
 import getPathTargetObj from "../../utils/getPathTargetObj";
 import { nanoid } from "nanoid";
@@ -44,6 +44,31 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
     onChange(path.slice(0, path.search(/\.\d$/)), questionsArr)
   }
 
+  const genQuestions =(fieldPath: string, questions: IQuestion[])=> {
+    return questions.map((fieldQuestion, idx)=> {
+      const isLastQuestion = idx === questions.length - 1
+      return (
+      <StyledQuestion key={fieldPath + 'Q' + idx} style={isLastQuestion? {border: 'none'}:{}}>
+        <QFormAccordion
+          question={fieldQuestion}
+          onChange={(action, newQData)=> updateAttributeQuestions(action, fieldPath+'.'+idx, newQData)}
+          key={fieldQuestion.id}
+        />
+        {isLastQuestion && (
+          <Button
+            color="black" 
+            variant="ghost"
+            onClick={()=> updateAttributeQuestions('add', fieldPath+'.'+idx)}
+            style={{marginTop: 20}}
+          >
+            <Plus />
+            Add a question
+          </Button>
+        )}
+      </StyledQuestion>
+    )})
+  }
+
 
   return (
     <StyledFormWrapper>
@@ -65,7 +90,9 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
               const [label, fieldData] = field;
               let fieldPath = `personalInformation.${label}`;
 
-              return !(fieldData instanceof Array)? (//fixed fields
+              return fieldData instanceof Array?
+                genQuestions(fieldPath, fieldData) : 
+                (//fixed fields
                 <StyledField key={'personal ' + field[0] + idx}>
                   {label.replace(/[A-Z]/, ' $&')}
                   {fieldData.note && <span>{fieldData.note}</span>}
@@ -80,27 +107,7 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
                     onChange={()=> onChange(fieldPath + '.show' , !fieldData.show)}
                   />
                 </StyledField>
-              ):( // questions
-                fieldData.map((fieldQuestion, idx)=> (
-                  <>
-                    <QFormAccordion
-                      question={fieldQuestion}
-                      onChange={(action, newQData)=> updateAttributeQuestions(action, fieldPath+'.'+idx, newQData)}
-                      key={fieldQuestion.id}
-                    />
-                    {idx === fieldData.length - 1 && (
-                      <Button
-                        color="black" 
-                        variant="ghost"
-                        onClick={()=> updateAttributeQuestions('add', fieldPath+'.'+idx)}
-                      >
-                        <Plus />
-                        Add a question
-                      </Button>
-                    )}
-                  </>
-                ))
-              );
+              )
             })}
             
           </ul>

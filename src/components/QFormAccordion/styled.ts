@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 
 export const StyledQuestion = styled.div`
-  padding: 2rem 0;
   border-radius: 20px;
   border=bottom: 1px solid gray;
   transition: height 0.3s ease-out;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 
 export const StyledFormWrapper = styled.main`
-  padding: 3rem;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 6rem;
@@ -26,6 +26,9 @@ export const StyledSectionContainer = styled.div`
   padding: 3rem;
   border-radius: 20px;
   box-shadow: 3px 3px 14px 0px rgba(190, 190, 190, 0.30);
+  & > ul { // fields list
+    list-style-type: none;
+  }
 `;
 
 
@@ -40,6 +43,12 @@ export const StyledField = styled.li`
   font-weight: 600;
   text-transform: capitalize;
   border-bottom: 1px solid ${({theme})=> theme.lightGray};
+`;
+
+export const StyledQuestion = styled(StyledField)`
+  padding: 2rem 0;
+  text-transform: normal;
+  display: list-item;
 `;
 
 

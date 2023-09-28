@@ -26,14 +26,14 @@ export function SwitchButton({
   return (
     <StyledSwitchWrapper>
       <StyledButtonSlider
-        isChecked={isChecked}
+        $isChecked={isChecked}
         disabled={disabled}
         onClick={handleClick}
       >
         <StyledSwitch
           className='StyledSwitch'
           direction={isChecked ? "left" : "right"}
-          isChecked={isChecked}
+          $isChecked={isChecked}
           disabled={disabled}
         />
       </StyledButtonSlider>

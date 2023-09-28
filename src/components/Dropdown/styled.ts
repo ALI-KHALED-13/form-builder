@@ -18,8 +18,8 @@ export const StyledNote = styled.p`
 /**/////////////////////////////////////////////////////////////////////////////// */
 
 interface StyledDDProps {
-  expandDD: boolean;
-  isTransparent: boolean;
+  $expandDD: boolean;
+  $isTransparent: boolean;
   readonly?: boolean;
 }
 
@@ -45,7 +45,7 @@ export const StyledDropDown = styled.div<StyledDDProps>`
     cursor: not-allowed;
   `}
 
-  ${({expandDD, theme, isTransparent})=> expandDD && !isTransparent && css`
+  ${({$expandDD, theme, $isTransparent})=> $expandDD && !$isTransparent && css`
     border: 1px solid ${theme.green};
   `}
 `;

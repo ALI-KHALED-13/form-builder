@@ -33,11 +33,15 @@ const QFormAccordion =({question, onChange}:QFormAccordionProps)=> {
 
   const TypeEditCompMap = {
     "Paragraph": ParagraphQ,
-    "short": ParagraphQ,
-    "Yes/No": ParagraphQ,
-    'dropdown': ChoicesQ,
-    'MCQ': ChoicesQ,
+    "ShortAnswer": ParagraphQ,
+    "YesNo": ParagraphQ,
+    'Dropdown': ChoicesQ,
+    'MultipleChoice': ChoicesQ,
+    'Date': ParagraphQ,
+    'Number': ParagraphQ,
+    'FileUpload': ParagraphQ
   }
+
   const QuestionComp = TypeEditCompMap[questionData.type as keyof typeof TypeEditCompMap]
 
   return (
@@ -67,10 +71,10 @@ const QFormAccordion =({question, onChange}:QFormAccordionProps)=> {
           </div>
       ):(
         <>
-          <StyledType>{questionData.type}</StyledType>
+          <StyledType>{questionTypesOps.find(qt=> qt.value === questionData.type)?.display}</StyledType>
           <div className='space-flex'>
             <h3>{questionData.question}</h3>
-            <Pencil size={24} onClick={()=> setIsEditing(!isEditing)} style={{cursor: 'pointer'}}/>
+            <Pencil size={25} weight="duotone" onClick={()=> setIsEditing(!isEditing)} style={{cursor: 'pointer'}}/>
           </div>
         </>
       )}

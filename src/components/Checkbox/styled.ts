@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface StyledCheckboxProps {
-  isChecked: boolean;
+  $isChecked: boolean;
   disabled?: boolean;
 }
 interface StyledLabelProps {
@@ -29,7 +29,7 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
 
   transition: background-color 0.2s ease-in-out;
 
-  ${ ({ isChecked, disabled, theme})=> isChecked && css`
+  ${ ({ $isChecked, disabled, theme})=> $isChecked && css`
     background-color: ${theme[disabled ? "gray" : "lightGreen"]};
     display: flex;
     justify-content: center;

@@ -15,6 +15,8 @@ interface IQuestion {
   maxChoice?: number;
   other?: boolean;
   disqualify?: boolean;
+  duration?: number;
+  durationUnit: string;
 }
 
 interface IApplicationFormTpl {
