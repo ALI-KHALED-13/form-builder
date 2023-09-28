@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import ApplicationRenderer from './components/ApplicationRenderer'
+import ApplicationFormRenderer from './components/ApplicationFormRenderer'
 import getPathTargetObj from './utils/getPathTargetObj'
 
 
@@ -8,8 +8,8 @@ function App() {
 
   const [formData, setFormData] = useState<null | IApplicationFormTpl>(null)
 
-  const tplTypeMap = {
-    "applicationForm": ApplicationRenderer 
+  const tplRendererMap = {
+    "applicationForm": ApplicationFormRenderer 
   }
 
   useEffect(()=> {
@@ -17,7 +17,7 @@ function App() {
     fetch('http://127.0.0.1:4010/api/422.37546357374447/programs/nostrum/application-form')
     .then(resp=> resp.json())
     .then(respObj=> setFormData(respObj.data))
-
+    .catch(console.error)
   }, [])
 
   const updateFormData =(fieldPath:string, value:any)=>{
@@ -40,7 +40,7 @@ function App() {
     }  
   }
 
-  const Renderer = formData && tplTypeMap[formData?.type as keyof (typeof tplTypeMap)];
+  const Renderer = formData && tplRendererMap[formData?.type as keyof (typeof tplRendererMap)];
 
   return Renderer && (
       <Renderer

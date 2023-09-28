@@ -14,11 +14,5 @@ declare module 'styled-components' {
     whitishGray: string;
     green: string;
     lightGreen: string;
-    ////
-    spaceNavy: string;
-    navy: string;
-    lightNavy: string;
-    transparentGray: string;
-    shadowGray: string;
   }
 }

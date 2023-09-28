@@ -18,7 +18,7 @@ interface ApplicationRendererProps {
 
 
 
-const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)=>{
+const ApplicationFormRenderer =({readOnly, data, onChange}:ApplicationRendererProps)=>{
 
   const updateAttributeQuestions =(action: string, path: string, QData?: IQuestion)=> {
     let {targetObj: questionsArr} = getPathTargetObj(path, data.attributes);
@@ -95,9 +95,10 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
               const [label, fieldData] = field;
               let fieldPath = `personalInformation.${label}`;
 
-              return fieldData instanceof Array?
-                genQuestions(fieldPath, fieldData)
-                : (//fixed fields
+              if (fieldData instanceof Array){
+                return genQuestions(fieldPath, fieldData)
+              }
+              return (//fixed fields
                 <StyledField key={fieldPath + idx}>
                   {label.replace(/[A-Z]/, ' $&')}
                   {fieldData.note && <span>{fieldData.note}</span>}
@@ -125,9 +126,10 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
               const [label, fieldData] = field;
               let fieldPath = `profile.${label}`;
 
-              return fieldData instanceof Array?
-                genQuestions(fieldPath, fieldData)
-                : (//fixed fields
+              if (fieldData instanceof Array){
+                return genQuestions(fieldPath, fieldData)
+              }
+              return (//fixed fields
                 <StyledField  key={fieldPath + idx}>
                   {label.replace(/[A-Z]/, ' $&')}
                   {fieldData.note && <span>{fieldData.note}</span>}
@@ -162,4 +164,4 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
 
 }
 
-export default ApplicationRenderer;
+export default ApplicationFormRenderer;
