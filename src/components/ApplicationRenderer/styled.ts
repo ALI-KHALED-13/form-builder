@@ -35,6 +35,7 @@ export const StyledSectionContainer = styled.div`
 export const StyledField = styled.li`
   padding: 2.5rem 0;
   display: grid;
+  gap: 1rem;
   grid-template-columns: 2.5fr 1fr 1fr;
   justify-content: space-between;
   align-items: center;
@@ -49,6 +50,7 @@ export const StyledQuestion = styled(StyledField)`
   padding: 2rem 0;
   text-transform: normal;
   display: list-item;
+  transition: height 0.3s ease-out;
 `;
 
 

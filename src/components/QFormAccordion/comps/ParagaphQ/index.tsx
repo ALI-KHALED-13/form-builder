@@ -17,7 +17,7 @@ const ParagraphQ =({question, onChange}:ParagraphQProps)=> {
         placeholder="Type here"
         onChange={(evt)=> onChange('question', evt.target.value)}
       />
-      {question.type == 'Yes/No' && (
+      {question.type == 'YesNo' && (
         <Checkbox
           option={{value: 'disqualify', display: 'Disqualify candidate if the answer is no'}}
           isChecked={question.disqualify as boolean}

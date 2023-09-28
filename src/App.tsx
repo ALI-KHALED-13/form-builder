@@ -27,7 +27,16 @@ function App() {
 
       targetObj[pathList[pathList.length - 1] as keyof typeof targetObj] = value;
 
-      setFormData({...formData, attributes: objCopy})
+      const newFormData = {...formData, attributes: objCopy};
+
+      setFormData(newFormData)
+      fetch("http://127.0.0.1:4010/api/707.8783589071377/programs/molestias/application-form", {
+        method: "PUT",
+        body: JSON.stringify({data: newFormData}),
+        headers: {
+          "content-type": "application/json"
+        }
+      })
     }  
   }
 

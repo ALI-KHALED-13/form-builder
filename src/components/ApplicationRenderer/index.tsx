@@ -3,11 +3,11 @@ import Button from "../Button";
 import Checkbox from "../Checkbox";
 import ImageInput from "../ImageInput";
 import { SwitchButton } from "../SwitchButton";
-import { StyledFormWrapper, StyledField, StyledSectionContainer, StyledSectionHeader, StyledQuestion } from "./styled";
 import QFormAccordion from "../QFormAccordion";
 import getPathTargetObj from "../../utils/getPathTargetObj";
 import { nanoid } from "nanoid";
-
+import { defaultQuestionData } from "./config";
+import { StyledFormWrapper, StyledField, StyledSectionContainer, StyledSectionHeader, StyledQuestion } from "./styled";
 
 
 interface ApplicationRendererProps {
@@ -16,16 +16,7 @@ interface ApplicationRendererProps {
   onChange: (path: string, value: any) => void
 }
 
-const defaultQuestionData = {
-    "type": "Paragraph",
-    "question": "string",
-    "choices": [
-      "string"
-    ],
-    "maxChoice": 0,
-    "disqualify": false,
-    "other": false
-}
+
 
 const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)=>{
 
@@ -39,12 +30,26 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
         questionsArr.map((q:IQuestion)=> q.id == QData?.id? QData : q)
         break;
       case 'delete':
-        questionsArr = questionsArr.filter((q:IQuestion)=> q.id !== QData?.id)    
+        questionsArr = questionsArr.filter((q:IQuestion)=> q.id !== QData?.id) 
     }
     onChange(path.slice(0, path.search(/\.\d$/)), questionsArr)
   }
 
   const genQuestions =(fieldPath: string, questions: IQuestion[])=> {
+    if (questions.length == 0){
+      return (
+      <Button
+        key={fieldPath + 'Q' + 0}
+        color="black" 
+        variant="ghost"
+        onClick={()=> updateAttributeQuestions('add', fieldPath+'.0')}
+        style={{marginTop: 20}}
+      >
+        <Plus />
+        Add a question
+      </Button>
+      );
+    }
     return questions.map((fieldQuestion, idx)=> {
       const isLastQuestion = idx === questions.length - 1
       return (
@@ -91,9 +96,9 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
               let fieldPath = `personalInformation.${label}`;
 
               return fieldData instanceof Array?
-                genQuestions(fieldPath, fieldData) : 
-                (//fixed fields
-                <StyledField key={'personal ' + field[0] + idx}>
+                genQuestions(fieldPath, fieldData)
+                : (//fixed fields
+                <StyledField key={fieldPath + idx}>
                   {label.replace(/[A-Z]/, ' $&')}
                   {fieldData.note && <span>{fieldData.note}</span>}
                   <Checkbox
@@ -109,9 +114,45 @@ const ApplicationRenderer =({readOnly, data, onChange}:ApplicationRendererProps)
                 </StyledField>
               )
             })}
-            
           </ul>
-          
+        </StyledSectionContainer>
+      </section>
+      <section>
+        <StyledSectionHeader>Profile</StyledSectionHeader>
+        <StyledSectionContainer>
+          <ul>
+          {Object.entries(data.attributes.profile).map((field, idx)=> {
+              const [label, fieldData] = field;
+              let fieldPath = `profile.${label}`;
+
+              return fieldData instanceof Array?
+                genQuestions(fieldPath, fieldData)
+                : (//fixed fields
+                <StyledField  key={fieldPath + idx}>
+                  {label.replace(/[A-Z]/, ' $&')}
+                  {fieldData.note && <span>{fieldData.note}</span>}
+                  <Checkbox
+                    option={{value: fieldPath + '.mandatory', display: 'mandatory'}}
+                    isChecked={fieldData.mandatory}
+                    onChange={(op, isChecked)=> onChange(op.value, !isChecked)}
+                  />
+                  <SwitchButton
+                    option={{value: fieldData.show? 'hide':'show', display: fieldData.show? 'hide':'show'}}
+                    isChecked={!fieldData.show}
+                    onChange={()=> onChange(fieldPath + '.show' , !fieldData.show)}
+                  />
+                </StyledField>
+              )
+            })}
+          </ul>
+        </StyledSectionContainer>
+      </section>
+      <section>
+        <StyledSectionHeader>Additional Questions</StyledSectionHeader>
+        <StyledSectionContainer>
+          <ul>
+            {genQuestions("customisedQuestions", data.attributes.customisedQuestions)}
+          </ul>
         </StyledSectionContainer>
       </section>
       

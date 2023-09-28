@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const StyledQuestion = styled.div`
   border-radius: 20px;
   border=bottom: 1px solid gray;
-  transition: height 0.3s ease-out;
+  
   & h3 {
     font-size: 20px;
     font-style: normal;
