@@ -11,7 +11,7 @@ import {
 import { IconProps } from "@phosphor-icons/react";
 
 interface InputProps {
-  value: string;
+  value: string | number;
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   onBlur?: (evt: React.FocusEvent<HTMLInputElement>)=> void;
@@ -33,7 +33,8 @@ interface InputProps {
   style?: React.CSSProperties;
   error?: string;
   note?: string;
-  //iconStyle?: React.CSSProperties;
+  min?: number;
+  max?: number;
   isTextarea?: boolean;
   rows?: number;
   cols?: number;
@@ -53,8 +54,8 @@ export const TextInput =({
   style,
   maxLength,
   icon,
-  /*iconStyle = {},
-  iconOnClick,*/
+  min,
+  max,
   type = "text",
   id,
   name,
@@ -96,6 +97,8 @@ export const TextInput =({
           maxLength={maxLength}
           onBlur={onBlur}
           onFocus={onFocus}
+          min={min}
+          max={max}
           {...isTextarea
             ? {as: "textarea", rows: rows, cols: cols}
           : {as: "input"}}

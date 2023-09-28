@@ -5,6 +5,7 @@ import { questionTypesOps } from './config';
 import Button from '../Button';
 import { StyledQuestion, StyledType } from './styled';
 import { Pencil } from '@phosphor-icons/react';
+import { ChoicesQ, ParagraphQ } from './comps';
 
 
 interface QFormAccordionProps {
@@ -26,19 +27,36 @@ const QFormAccordion =({question, onChange}:QFormAccordionProps)=> {
     setIsEditing(false);
   }
 
+  const handleQuestionChange =(field:string, value:any)=> {
+    setQuestionData({...questionData, [field]: value})
+  }
+
+  const TypeEditCompMap = {
+    "Paragraph": ParagraphQ,
+    "short": ParagraphQ,
+    "Yes/No": ParagraphQ,
+    'dropdown': ChoicesQ,
+    'MCQ': ChoicesQ,
+  }
+  const QuestionComp = TypeEditCompMap[questionData.type as keyof typeof TypeEditCompMap]
+
   return (
     <StyledQuestion>
       {isEditing? (
-        <>
-          <h3>Questions</h3>
           <div>
             <DropDown
+              label='type'
               options={questionTypesOps}
               value={questionTypesOps.find(type=> type.value === questionData.type) as IOption}
-              onChange={(selectedOp)=> setQuestionData({...questionData, type: selectedOp.value})}
+              onChange={(selectedOp)=> handleQuestionChange('type', selectedOp.value)}
             />
-
-            <div className='space-flex'>
+            {QuestionComp && (
+              <QuestionComp
+                question={questionData}
+                onChange={handleQuestionChange}
+              />
+            )}
+            <div className='space-flex' style={{margin: '1.5rem 0'}}>
               <Button variant='ghost' color="red" onClick={deleteQuestion}>
                 Delete question
               </Button>
@@ -47,7 +65,6 @@ const QFormAccordion =({question, onChange}:QFormAccordionProps)=> {
               </Button>
             </div>
           </div>
-        </>
       ):(
         <>
           <StyledType>{questionData.type}</StyledType>

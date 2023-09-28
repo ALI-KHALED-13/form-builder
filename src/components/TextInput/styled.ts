@@ -7,12 +7,13 @@ interface StyledInputProps {
 }
 
 export const StyledLabel = styled.label`
-
-  font-family: 'Jost Semi Bold', sans-serif;
   width: 100%;
-  margin-bottom: 0.3rem;
+  margin: 1rem 0;
+  font-weight: 600;
+  font-size: 1.6rem;
   position: relative;
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   align-items: flex-start;
   text-transform: capitalize;
@@ -24,20 +25,19 @@ export const StyledInputContainer = styled.div<StyledInputProps>`
   align-items: center;
   gap: 1rem;
   position: relative;
-  border: ${({theme, error}) => error ? `1px solid ${theme.red}` : '1px solid transparent'};
+  border: ${({theme, error}) => `1px solid ${error? theme.red : theme.gray}`};
   
   ${({theme, readonly}) => !readonly && 
     css`
-      background-color: ${theme.white};
       padding: 0rem 1rem;
     `
   }
 
   color: ${({theme}) => theme.navy};
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
 
   &:focus-within {
-    border: 1px solid ${({theme, readonly}) => readonly? "transparent": theme.blue};
+    border: 1px solid ${({theme, readonly}) => readonly? "transparent": theme.green};
   }
 `;
 

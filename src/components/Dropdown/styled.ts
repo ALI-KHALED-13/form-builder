@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components';
 import {CaretDown} from '@phosphor-icons/react';
 
 export const StyledLabel = styled.label`
-
+  font-size: 1.6rem;
+  font-weight: 600; 
   width: 100%;
   margin-bottom: 0.3rem;
   text-transform: capitalize;

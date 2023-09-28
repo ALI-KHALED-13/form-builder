@@ -4,7 +4,7 @@
 export const questionTypesOps = [
   {value: 'Paragraph', display: 'Paragraph'},
   {value: 'short', display: 'Short Answer'},
-  {value: 'radio', display: 'Yes/No'},
+  {value: 'Yes/No', display: 'Yes/No'},
   {value: 'dropdown', display: 'Dropdown'},
   {value: 'MCQ', display: 'Multiple Choice'},
   {value: 'date', display: 'Date'},

@@ -11,7 +11,7 @@ interface IQuestion {
   id: string;
   question: string;
   type: string;//'Paragraph' | 'short' | 'radio' | 'dropdown' | 'MCQ' | 'date' | 'number' | 'upload';
-  choices?: string[];
+  choices: string[];
   maxChoice?: number;
   other?: boolean;
   disqualify?: boolean;
